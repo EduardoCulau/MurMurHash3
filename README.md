@@ -26,4 +26,4 @@ git clone https://github.com/EduardoCulau/MurMurHash3.git
 5. pandas -> opcional, mas recomendado
 
 ### Arquivos de Entrada
-Um CSV com UUIDs ne primeira e *única coluna*
+Um CSV com UUIDs na primeira e *única coluna*

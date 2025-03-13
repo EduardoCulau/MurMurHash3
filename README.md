@@ -15,7 +15,7 @@ Clone the repository, compile and run it.
 ### Clone
 
 ```
-git clone https://github.com/EduardoCulau/AI_Miss_Cann.git
+git clone https://github.com/EduardoCulau/MurMurHash3.git
 ```
 
 ### Módulos Necessários

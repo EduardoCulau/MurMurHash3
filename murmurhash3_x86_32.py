@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import sys
 import csv
@@ -106,6 +107,7 @@ def write_uuids_to_csv(uuid_list, file_path):
 def filtra_uuids (uuid_lista, threshold):
     
     uuid_lista_filtrada = []
+    percentages = []
     
     # Quantidade do processamento
     qtd_total = len(uuid_lista)
@@ -119,6 +121,7 @@ def filtra_uuids (uuid_lista, threshold):
         
         if porcentagem <= threshold:
             uuid_lista_filtrada.append(uuid)
+            percentages.append(porcentagem)
         
         qtd_processados += 1
         
@@ -129,7 +132,7 @@ def filtra_uuids (uuid_lista, threshold):
     if _INFO_:
         print(f'\nFim da filtragem, retornando {len(uuid_lista_filtrada)} uuid dentro da Allow-List')
     
-    return uuid_lista_filtrada
+    return uuid_lista_filtrada, percentages
 
 ########################## MAIN ##########################
 
@@ -149,7 +152,16 @@ _UUIDS_  = ['b1e06607-0883-40cf-bee5-561058ae3832',
             '3db65d21-98f6-4638-a23a-945d9540217e']
             
 # Filtra os UUIDs        
-uuid_lista_filtrada = filtra_uuids(uuid_lista, ALLOWLIST/100)
+uuid_lista_filtrada, porcentagens = filtra_uuids(uuid_lista, ALLOWLIST/100)
 
 # Exporta os arquivos para o arquivo de destino
 write_uuids_to_csv(uuid_lista_filtrada, output_csv_full_path)
+
+# Plota a porcentagem dos filtrados mostrando que todos estavam menor que o Threshould
+plt.figure(figsize=(10, 6))
+plt.hist(porcentagens, bins=100, range=(0, 1), edgecolor='black')
+plt.title('MurmurHash3 Hashed UUIDs Distribution')
+plt.xlabel('Percentage')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
